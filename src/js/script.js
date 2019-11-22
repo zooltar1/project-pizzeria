@@ -103,9 +103,9 @@
 
         event.preventDefault();
 
-        /* [IN PROGRESS] toggle active class on element of thisProduct */
+        /* [done] toggle active class on element of thisProduct */
 
-        thisProduct.element.toggle('active');
+        thisProduct.element.classList.toggle('active');
 
         /* [done] find all active products */
 
