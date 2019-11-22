@@ -91,7 +91,7 @@
 
       const thisProduct = this;
 
-      /* [done] find the clickable trigger (the element that should react to clicking) */
+      /* [in progress] find the clickable trigger (the element that should react to clicking) */
 
       const trigger = document.querySelector('.product__header i');
 
@@ -109,19 +109,21 @@
 
         /* [done] find all active products */
 
-        const activeProducts = document.querySelectorAll('.template-menu-product article.active');
+        const activeProducts = document.querySelector('.product-list article.active');
+
+        console.log('active product is:', activeProducts);
 
         /* [done] START LOOP: for each active product */
 
         for(let activeProduct of activeProducts){
 
-          /* [done] START: if the active product isn't the element of thisProduct */
+          /* [in progress] START: if the active product isn't the element of thisProduct */
 
           if(!activeProduct.hasOwnProperty(thisProduct)){
 
             /* [done] remove class active for the active product */
 
-            activeProduct.remove('active');
+            activeProduct.classList.remove('active');
 
             /* [done] END: if the active product isn't the element of thisProduct */
 
