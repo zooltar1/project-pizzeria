@@ -186,8 +186,6 @@
 
       let price = thisProduct.data.price;
 
-      console.log('price: ',price);
-
       /* [done] START LOOP: for each paramId in thisProduct.data.params */
 
       for(let paramId in thisProduct.data.params){
@@ -204,8 +202,6 @@
 
           const option = param.options[optionId];
 
-          console.log('const option: ',option.price);
-
           const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
 
           /* [done] START IF: if option is selected and option is not default */
@@ -215,8 +211,6 @@
             /* [done] add price of option to variable price */
 
             price = price + option.price;
-
-            console.log('price+ option: ',price);
 
             /* [done] END IF: if option is selected and option is not default */
 
@@ -228,7 +222,7 @@
 
             /* [in progress] deduct price of option from price */
 
-            option.price = price - option.default.price;
+            price = price - option.price;
 
             console.log('option.price: ',option.price);
 
@@ -246,7 +240,7 @@
 
       /* [in progress] set the contents of thisProduct.priceElem to be the value of variable price */
 
-      price = thisProduct.priceElem;
+      thisProduct.priceElem[price];
 
     }
 
