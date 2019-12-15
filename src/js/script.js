@@ -220,7 +220,7 @@
 
           else if(!optionSelected && option.default){
 
-            /* [in progress] deduct price of option from price */
+            /* [done] deduct price of option from price */
 
             price = price - option.price;
 
@@ -238,9 +238,9 @@
 
       }
 
-      /* [in progress] set the contents of thisProduct.priceElem to be the value of variable price */
+      /* [done] set the contents of thisProduct.priceElem to be the value of variable price */
 
-      thisProduct.priceElem[price];
+      thisProduct.priceElem.innerHTML = price;
 
     }
 
