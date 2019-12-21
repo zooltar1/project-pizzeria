@@ -100,6 +100,7 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
 
     initAccordion(){
@@ -226,15 +227,40 @@
 
             console.log('option.price: ',option.price);
 
-            /* END ELSE IF: if option is not selected and option is default */
+            /* [done] END ELSE IF: if option is not selected and option is default */
 
           }
 
-          /* END LOOP: for each optionId in param.options */
+          const optionImages = thisProduct.imageWrapper;
+
+          console.log('optionImages: ', optionImages);
+
+
+          if(optionSelected){
+
+            for(let images in optionImages){
+
+              console.log('images: ', images);
+
+            }
+
+          }
+
+          else(!optionSelected);{
+
+            for(let images in optionImages){
+
+              console.log('images: ',images);
+
+            }
+
+          }
+
+          /* [done] END LOOP: for each optionId in param.options */
 
         }
 
-        /* END LOOP: for each paramId in thisProduct.data.params */
+        /* [done] END LOOP: for each paramId in thisProduct.data.params */
 
       }
 
