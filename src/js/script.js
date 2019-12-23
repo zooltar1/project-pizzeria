@@ -231,26 +231,26 @@
 
           }
 
-          const optionImages = thisProduct.imageWrapper;
+          const optionImages = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId);
 
-          console.log('optionImages: ', optionImages);
+
 
 
           if(optionSelected){
 
-            for(let images in optionImages){
+            for(let image in optionImages){
 
-              console.log('images: ', images);
+              image.classList.add(classNames.menuProduct.imageVisible);
 
             }
 
           }
 
-          else(!optionSelected);{
+          else {
 
-            for(let images in optionImages){
+            for(let image in optionImages){
 
-              console.log('images: ',images);
+              image.classList.remove(classNames.menuProduct.imageVisible);
 
             }
 
