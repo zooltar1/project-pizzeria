@@ -233,12 +233,12 @@
 
           const optionImages = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId);
 
-
+          console.log('optionImages: ',optionImages);
 
 
           if(optionSelected){
 
-            for(let image in optionImages){
+            for(let image of optionImages){
 
               image.classList.add(classNames.menuProduct.imageVisible);
 
@@ -248,7 +248,7 @@
 
           else {
 
-            for(let image in optionImages){
+            for(let image of optionImages){
 
               image.classList.remove(classNames.menuProduct.imageVisible);
 
