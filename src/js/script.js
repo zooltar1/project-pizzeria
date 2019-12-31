@@ -67,6 +67,8 @@
 
       thisProduct.initOrderForm();
 
+      thisProduct.initAmountWidget();
+
       thisProduct.processOrder();
 
     }
@@ -101,6 +103,7 @@
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
       thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
+      thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
     }
 
     initAccordion(){
@@ -225,16 +228,11 @@
 
             price = price - option.price;
 
-            console.log('option.price: ',option.price);
-
             /* [done] END ELSE IF: if option is not selected and option is default */
 
           }
 
           const optionImages = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId);
-
-          console.log('optionImages: ',optionImages);
-
 
           if(optionSelected){
 
@@ -270,10 +268,58 @@
 
     }
 
+    initAmountWidget(){
+      const thisProduct = this;
+
+      thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+    }
 
   }
 
+  class AmountWidget{
+    constructor(element){
+      const thisWidget = this;
 
+      thisWidget.getElements(element);
+      thisWidget.setValue(thisWidget.input.value);
+      thisWidget.initActions(element);
+
+      console.log('AmountWidget: ', thisWidget);
+      console.log('constructor arguments: ', element);
+    }
+
+    getElements(element){
+      const thisWidget = this;
+
+      thisWidget.element = element;
+      thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
+      thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
+      thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
+    }
+
+    setValue(value){
+      const thisWidget = this;
+
+      const newValue = parseInt(value);
+
+      /* TODO: Add validation */
+
+      thisWidget.value = newValue;
+      thisWidget.input.value = thisWidget.value;
+
+    }
+
+    initActions(element){
+      const thisWidget = this;
+
+      thisWidget.element = element;
+      thisWidget.input = thisWidget.element.addEventListener('change', thisWidget.setValue(thisWidget.input.value));
+      //thisWidget.linkDecrease = thisWidget.element.addEventListener('click', thisWidget.setValue(thisWidget.value - 1));
+      //thisWidget.linkIncrease = thisWidget.element.addEventListener('click', thisWidget.setValue(thisWidget.value + 1));
+
+    }
+
+  }
 
   const app = {
     initMenu: function(){
