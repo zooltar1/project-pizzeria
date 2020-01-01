@@ -67,7 +67,9 @@
 
       thisProduct.initOrderForm();
 
-      thisProduct.initAmountWidget();
+      thisProduct.initAmountWidget(thisProduct.amountWidgetElem.addEventListener('updated', function() {
+        thisProduct.processOrder();
+      }));
 
       thisProduct.processOrder();
 
@@ -262,6 +264,10 @@
 
       }
 
+      /* multiply price by amount */
+
+      price *= thisProduct.amountWidget.value;
+
       /* [done] set the contents of thisProduct.priceElem to be the value of variable price */
 
       thisProduct.priceElem.innerHTML = price;
@@ -282,7 +288,7 @@
 
       thisWidget.getElements(element);
       thisWidget.setValue(thisWidget.input.value);
-      thisWidget.initActions(element); // ??
+      thisWidget.initActions(element);
 
       console.log('AmountWidget: ', thisWidget);
       console.log('constructor arguments: ', element);
@@ -305,6 +311,9 @@
       /* TODO: Add validation */
 
       thisWidget.value = newValue;
+
+      thisWidget.announce();
+
       thisWidget.input.value = thisWidget.value;
 
     }
@@ -313,14 +322,31 @@
       const thisWidget = this;
 
 
-      thisWidget.input.addEventListener('change', thisWidget.setValue(thisWidget.input.value));
-      thisWidget.linkDecrease.addEventListener('click', thisWidget.setValue(thisWidget.value - 1));
-      thisWidget.linkIncrease.addEventListener('click', thisWidget.setValue(thisWidget.value + 1));
+      thisWidget.input.addEventListener('change', function() {
+        thisWidget.setValue(thisWidget.input.value);
+      });
 
-      console.log('thisWidget.input: ', thisWidget.input);
-      console.log('thisWidget.linkDecrease: ', thisWidget.linkDecrease);
-      console.log('thisWidget.linkIncrease: ', thisWidget.linkIncrease);
+      thisWidget.linkDecrease.addEventListener('click', function(event) {
+        event.preventDefault();
+        thisWidget.setValue(thisWidget.value - 1);
+      });
 
+      thisWidget.linkIncrease.addEventListener('click', function(event) {
+        event.preventDefault();
+        thisWidget.setValue(thisWidget.value + 1);
+      });
+
+      //console.log('thisWidget.input: ', thisWidget.input);
+      //console.log('thisWidget.linkDecrease: ', thisWidget.linkDecrease);
+      //console.log('thisWidget.linkIncrease: ', thisWidget.linkIncrease);
+
+    }
+
+    announce(){
+      const thisWidget = this;
+
+      const event = new Event('updated');
+      thisWidget.element.dispatchEvent(event);
     }
 
   }
