@@ -282,7 +282,7 @@
 
       thisWidget.getElements(element);
       thisWidget.setValue(thisWidget.input.value);
-      thisWidget.initActions(element);
+      thisWidget.initActions(element); // ??
 
       console.log('AmountWidget: ', thisWidget);
       console.log('constructor arguments: ', element);
@@ -309,13 +309,17 @@
 
     }
 
-    initActions(element){
+    initActions(){
       const thisWidget = this;
 
-      thisWidget.element = element;
-      thisWidget.input = thisWidget.element.addEventListener('change', thisWidget.setValue(thisWidget.input.value));
-      //thisWidget.linkDecrease = thisWidget.element.addEventListener('click', thisWidget.setValue(thisWidget.value - 1));
-      //thisWidget.linkIncrease = thisWidget.element.addEventListener('click', thisWidget.setValue(thisWidget.value + 1));
+
+      thisWidget.input.addEventListener('change', thisWidget.setValue(thisWidget.input.value));
+      thisWidget.linkDecrease.addEventListener('click', thisWidget.setValue(thisWidget.value - 1));
+      thisWidget.linkIncrease.addEventListener('click', thisWidget.setValue(thisWidget.value + 1));
+
+      console.log('thisWidget.input: ', thisWidget.input);
+      console.log('thisWidget.linkDecrease: ', thisWidget.linkDecrease);
+      console.log('thisWidget.linkIncrease: ', thisWidget.linkIncrease);
 
     }
 
