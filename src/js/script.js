@@ -429,6 +429,9 @@
       thisCart.dom = {};
 
       thisCart.dom.wrapper = element;
+
+      console.log('thisCart.dom.wrapper: ', thisCart.dom.wrapper);
+
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger); // new line
     }
 
@@ -439,7 +442,7 @@
 
         event.preventDefault();
 
-        thisCart.dom.wrapper.toggle('classNames.cart.wrapperActive');
+        thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
 
       });
     }
