@@ -443,6 +443,7 @@
       const thisCart = this;
 
       thisCart.products = [];
+      thisCart.deliveryFee = settings.cart.defaultDeliveryFee;
 
       thisCart.getElements(element);
       thisCart.initActions();
@@ -498,9 +499,35 @@
       //console.log('adding product', menuProduct);
 
       thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
-      console.log('thisCart.products', thisCart.products);
+
+      //console.log('thisCart.products', thisCart.products);
+
+      thisCart.update();
 
     }
+
+    update(){
+      const thisCart = this;
+
+      let totalNumber = 0;
+      let subtotalPrice = 0;
+
+      for(let product of thisCart.products ){
+
+        subtotalPrice = subtotalPrice + product.price;
+
+        totalNumber = totalNumber + product.amount;
+
+      }
+
+      thisCart.totalPrice = subtotalPrice + thisCart.deliveryFee;
+
+      console.log('totalNumber: ', totalNumber);
+      console.log('subtotalPrice: ', subtotalPrice);
+      console.log('thisCart.totalPrice: ', thisCart.totalPrice);
+
+    }
+
   }
 
   class CartProduct{
