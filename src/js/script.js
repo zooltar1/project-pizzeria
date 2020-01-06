@@ -432,7 +432,9 @@
     announce(){
       const thisWidget = this;
 
-      const event = new Event('updated');
+      const event = new CustomEvent('updated', {
+        bubbles: true
+      });
       thisWidget.element.dispatchEvent(event);
     }
 
@@ -458,11 +460,18 @@
 
       thisCart.dom.wrapper = element;
 
-      thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList); // new code
+      thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
 
       // console.log('thisCart.dom.wrapper: ', thisCart.dom.wrapper);
 
-      thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger); // new line
+      thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
+
+      thisCart.renderTotalsKeys = ['totalNumber', 'totalPrice', 'subtotalPrice', 'deliveryFee'];
+
+      for(let key of thisCart.renderTotalsKeys){
+        thisCart.dom[key] = thisCart.dom.wrapper.querySelectorAll(select.cart[key]);
+      }
+
     }
 
     initActions(){
@@ -475,6 +484,15 @@
         thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
 
       });
+
+      thisCart.dom.productList.addEventListener('updated', function(){
+        thisCart.update();
+      });
+
+      thisCart.dom.productList.addEventListener('remove', function(){
+        thisCart.remove(event.detail.cartProduct);
+      });
+
     }
 
     add(menuProduct){
@@ -509,22 +527,43 @@
     update(){
       const thisCart = this;
 
-      let totalNumber = 0;
-      let subtotalPrice = 0;
+      thisCart.totalNumber = 0;
+      thisCart.subtotalPrice = 0;
 
       for(let product of thisCart.products ){
 
-        subtotalPrice = subtotalPrice + product.price;
+        thisCart.subtotalPrice = thisCart.subtotalPrice + product.price;
 
-        totalNumber = totalNumber + product.amount;
+        thisCart.totalNumber = thisCart.totalNumber + product.amount;
 
       }
 
-      thisCart.totalPrice = subtotalPrice + thisCart.deliveryFee;
+      thisCart.totalPrice = thisCart.subtotalPrice + thisCart.deliveryFee;
 
-      console.log('totalNumber: ', totalNumber);
-      console.log('subtotalPrice: ', subtotalPrice);
-      console.log('thisCart.totalPrice: ', thisCart.totalPrice);
+      //console.log('totalNumber: ', thisCart.totalNumber);
+      //console.log('subtotalPrice: ', thisCart.subtotalPrice);
+      //console.log('thisCart.totalPrice: ', thisCart.totalPrice);
+
+      for(let key of thisCart.renderTotalsKeys){
+        for(let elem of thisCart.dom[key]){
+          elem.innerHTML = thisCart[key];
+        }
+      }
+
+    }
+
+    remove(cartProduct){
+      const thisCart = this;
+
+      const index = thisCart.products.indexOf(cartProduct);
+
+      console.log('index: ', index);
+
+      thisCart.products.splice(index, 1);
+
+      cartProduct.dom.wrapper.remove(cartProduct);
+
+      thisCart.update();
 
     }
 
@@ -545,6 +584,7 @@
       thisCartProduct.getElements(element);
 
       thisCartProduct.initAmountWidget();
+      thisCartProduct.initActions();
 
       //console.log('new CartProduct: ', thisCartProduct);
       //console.log('productData: ',menuProduct);
@@ -572,6 +612,42 @@
         thisCartProduct.price = thisCartProduct.priceSingle * thisCartProduct.amount;
 
         thisCartProduct.dom.price = thisCartProduct.price;
+
+      });
+
+    }
+
+    remove(){
+      const thisCartProduct = this;
+
+      const event = new CustomEvent('remove', {
+        bubbles: true,
+        detail: {
+          cartProduct: thisCartProduct,
+        },
+      });
+
+      thisCartProduct.dom.wrapper.dispatchEvent(event);
+
+      console.log('thisCartProduct.remove', thisCartProduct.remove);
+
+    }
+
+    initActions(){
+      const thisCartProduct = this;
+
+      thisCartProduct.dom.edit.addEventListener('click', function(){
+
+        event.preventDefault();
+
+
+      });
+
+      thisCartProduct.dom.remove.addEventListener('click', function(){
+
+        event.preventDefault();
+
+        thisCartProduct.remove();
 
       });
 
