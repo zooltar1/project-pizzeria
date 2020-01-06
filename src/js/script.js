@@ -539,8 +539,8 @@
     initAmountWidget(){
       const thisCartProduct = this;
 
-      thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.wrapper.querySelector(select.cart.toggleTrigger));
-      thisCartProduct.AmountWidget.addEventListener('click', function(){
+      thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget); // ??
+      thisCartProduct.amountWidget.addEventListener('click', function(){
         thisCartProduct.amount = thisCartProduct.amountWidget.value;
         thisCartProduct.price = thisCartProduct.priceSingle * thisCartProduct.amount;
 
