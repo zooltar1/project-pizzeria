@@ -471,8 +471,7 @@
       thisCart.dom.phone = thisCart.dom.wrapper.querySelector(select.cart.phone);
       thisCart.dom.address = thisCart.dom.wrapper.querySelector(select.cart.address);
 
-      thisCart.phone = thisCart.dom.phone.value;
-      thisCart.address = thisCart.dom.address.value;
+      console.log(thisCart.dom.phone);
 
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
 
@@ -593,14 +592,20 @@
       const url = settings.db.url + '/' + settings.db.order;
 
       const payload = {
-        address: thisCart.address,
+        address: thisCart.dom.address,
         totalPrice: thisCart.totalPrice,
         totalNumber: thisCart.totalNumber,
         subtotalPrice: thisCart.subtotalPrice,
         deliveryFee: thisCart.deliveryFee,
-        phone: thisCart.phone,
+        phone: thisCart.dom.phone,
+
+        products: [],
 
       };
+
+      for(let elem of thisCart.products){
+        elem.getData();
+      }
 
       const options = {
         method: 'POST',
@@ -653,6 +658,21 @@
       thisCartProduct.dom.price = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.price);
       thisCartProduct.dom.edit = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.edit);
       thisCartProduct.dom.remove = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.remove);
+    }
+
+    getData(){
+      const thisCartProduct = this;
+
+      const orderObject = {
+        id : thisCartProduct.id,
+        amount: thisCartProduct.amount,
+        price: thisCartProduct.price,
+        priceSingle: thisCartProduct.priceSingle,
+        params: thisCartProduct.params,
+      };
+
+      console.log('orderObject', orderObject);
+
     }
 
     initAmountWidget(){
