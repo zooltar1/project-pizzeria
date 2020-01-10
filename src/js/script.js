@@ -603,8 +603,8 @@
 
       };
 
-      for(let elem of thisCart.products){
-        elem.getData();
+      for(let product of thisCart.products){
+        payload.products.push(product.getData());
       }
 
       const options = {
