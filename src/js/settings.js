@@ -61,6 +61,15 @@ export const select = {
     remove: '[href="#remove"]',
   },
 
+  booking: {
+    peopleAmount: '.people-amount',
+    hoursAmount: '.hours-amount',
+    tables: '.floor-plan .table',
+  },
+  nav: {
+    links: '.main-nav a',
+  },
+
 };
 
 export const classNames = {

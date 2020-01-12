@@ -56,9 +56,9 @@ const app = {
   initBooking: function(){
     const thisApp = this;
 
-    const bookingWidget = document.querySelector(select.containerOf.booking);
+    const bookingElem = document.querySelector(select.containerOf.booking);
 
-    thisApp.booking = new Booking(bookingWidget);
+    thisApp.booking = new Booking(bookingElem);
 
   },
 
@@ -72,8 +72,8 @@ const app = {
 
     thisApp.initData();
     thisApp.initCart();
+    thisApp.initBooking();
   },
 };
 
 app.init();
-app.initBooking();
