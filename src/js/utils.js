@@ -1,6 +1,6 @@
 /* global Handlebars, dataSource */
 
-export const utils = {}; // eslint-disable-line no-unused-vars
+export const utils = {};
 
 utils.createDOMFromHTML = function(htmlString) {
   let div = document.createElement('div');
@@ -49,7 +49,6 @@ utils.convertDataSourceToDbJson = function(){
   }
 
   console.log(JSON.stringify({product: productJson, order: []}, null, '  '));
-
 };
 
 utils.numberToHour = function(number){

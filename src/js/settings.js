@@ -41,11 +41,10 @@ export const select = {
       output: '.output',
     },
   },
-
   cart: {
     productList: '.cart__order-summary',
     toggleTrigger: '.cart__summary',
-    totalNumber: '.cart__total-number',
+    totalNumber: `.cart__total-number`,
     totalPrice: '.cart__total-price strong, .cart__order-total .cart__order-price-sum strong',
     subtotalPrice: '.cart__order-subtotal .cart__order-price-sum strong',
     deliveryFee: '.cart__order-delivery .cart__order-price-sum strong',
@@ -60,7 +59,6 @@ export const select = {
     edit: '[href="#edit"]',
     remove: '[href="#remove"]',
   },
-
   booking: {
     peopleAmount: '.people-amount',
     hoursAmount: '.hours-amount',
@@ -69,7 +67,6 @@ export const select = {
   nav: {
     links: '.main-nav a',
   },
-
 };
 
 export const classNames = {
@@ -77,11 +74,9 @@ export const classNames = {
     wrapperActive: 'active',
     imageVisible: 'active',
   },
-
   cart: {
     wrapperActive: 'active',
   },
-
   booking: {
     loading: 'loading',
     tableBooked: 'booked',
@@ -95,30 +90,24 @@ export const classNames = {
 };
 
 export const settings = {
-
   hours: {
     open: 12,
     close: 24,
   },
-
   amountWidget: {
     defaultValue: 1,
     defaultMin: 1,
     defaultMax: 9,
   },
-
   datePicker: {
     maxDaysInFuture: 14,
   },
-
   cart: {
     defaultDeliveryFee: 20,
   },
-
   booking: {
     tableIdAttribute: 'data-table',
   },
-
   db: {
     url: '//localhost:3131',
     product: 'product',
@@ -130,14 +119,10 @@ export const settings = {
     notRepeatParam: 'repeat=false',
     repeatParam: 'repeat_ne=false',
   },
-
 };
 
 export const templates = {
   menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
-
   cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
-
   bookingWidget: Handlebars.compile(document.querySelector(select.templateOf.bookingWidget).innerHTML),
-
 };
