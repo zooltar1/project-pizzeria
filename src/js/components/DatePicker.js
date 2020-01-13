@@ -16,6 +16,8 @@ class DatePicker extends BaseWidget{
 
     thisWidget.initPlugin();
 
+    thisWidget.dom.input.value = thisWidget.value;
+
   }
 
   initPlugin(){
@@ -38,9 +40,9 @@ class DatePicker extends BaseWidget{
           return (date.getDay() === 1);
         }
       ],
-      onChange: function(selectedDates, dateStr) { // do poprawy
+      onChange: function(dateStr){
         thisWidget.value = dateStr;
-      }
+      },
     });
 
   }
