@@ -13,6 +13,8 @@ class Booking{
     thisBooking.getData();
     thisBooking.initActions();
 
+    thisBooking.selectedTable;
+
   }
 
   getData(){
@@ -67,7 +69,7 @@ class Booking{
         ]);
       })
       .then(function([bookings, eventsCurrent, eventsRepeat]){
-        // console.log(bookings);
+        console.log('bookings', bookings);
         // console.log(eventsCurrent);
         // console.log(eventsRepeat);
         thisBooking.parseData(bookings, eventsCurrent, eventsRepeat);
@@ -98,7 +100,7 @@ class Booking{
       }
     }
 
-    // console.log('thisBooking.booked', thisBooking.booked);
+    console.log('thisBooking.booked', thisBooking.booked);
 
     thisBooking.updateDOM();
   }
@@ -193,8 +195,11 @@ class Booking{
       table.addEventListener('click', function(){
         table.classList.add(classNames.booking.tableBooked);
         pickedTable = table.getAttribute(settings.booking.tableIdAttribute);
+        if(!isNaN(pickedTable)){
+          pickedTable = parseInt(pickedTable);
+        }
 
-        console.log('pickedTable', pickedTable);
+        // console.log('pickedTable', pickedTable);
 
         thisBooking.selectedTable = pickedTable;
 
@@ -231,6 +236,8 @@ class Booking{
     fetch(url, options)
       .then(function(response){
         return response.json();
+      }).then(function(parsedResponse){
+        console.log('parsedResponse', parsedResponse);
       });
 
     thisBooking.makeBooked(payload.date, payload.hour, payload.duration, payload.table);
