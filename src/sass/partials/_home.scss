@@ -84,13 +84,16 @@
     text-transform: uppercase;
     color: $color-light;
   }
+
+  .description {
+    width: 100%;
+  }
 }
 
 .image-order {
   position: relative;
   background: url('../images/assets/pizza-1.jpg') center;
   background-size: cover;
-
   margin-right: 5px;
 
   .description {

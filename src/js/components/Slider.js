@@ -32,7 +32,7 @@ function slider() {
   quotes.push(quoteTwo);
   quotes.push(quoteThree);
 
-  for (let quote of quotes) {
+  for(let quote of quotes) {
     const generatedHTML = templateSlide(quote);
     targetElement.insertAdjacentHTML('beforeend', generatedHTML);
   }
@@ -40,29 +40,29 @@ function slider() {
   const wrappers = targetElement.querySelectorAll('.slide');
   const icons = document.querySelectorAll('.slide-icon i');
 
-  for (let i = 0; i < wrappers.length; i++) {
+  for(let i = 0; i < wrappers.length; i++) {
     wrappers[i].style.display = 'none';
 
   }
 
-  for (let i = 0; i < icons.length; i++) {
+  for(let i = 0; i < icons.length; i++) {
     icons[i].classList.remove('fas');
     icons[i].classList.add('far');
   }
 
   index++;
   indexIcons++;
-  if (index > wrappers.length) {
+  if(index > wrappers.length) {
     index = 1;
   }
 
-  if (indexIcons > icons.length) {
+  if(indexIcons > icons.length) {
     indexIcons = 1;
   }
 
   icons[indexIcons - 1].classList.remove('far');
   wrappers[index - 1].style.display = 'block';
-  setTimeout(slider, 1500);
+  setTimeout(slider, 3000);
   icons[indexIcons - 1].classList.add('fas');
 }
 
