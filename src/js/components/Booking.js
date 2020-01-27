@@ -127,6 +127,15 @@ class Booking{
 
   updateDOM(){
     const thisBooking = this;
+    const startHour = 12;
+    const endHour = 24;
+    const step = .5;
+    let range  = 100/((endHour - startHour)/step);
+    let hourPercent = range;
+
+    let slider = document.getElementsByClassName('rangeSlider')[0];
+
+    let colors = '';
 
     thisBooking.date = thisBooking.datePicker.value;
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
@@ -157,6 +166,40 @@ class Booking{
         table.classList.remove(classNames.booking.tableBooked);
       }
     }
+
+    for (let i = startHour; i <= endHour; i = i+step) {
+
+      let hour = i;
+      let tables = 0;
+
+      if(
+        typeof thisBooking.booked[thisBooking.date] == 'undefined'
+        ||
+        typeof thisBooking.booked[thisBooking.date][hour] == 'undefined'
+      ){
+        tables = 0;
+      } else {
+        tables = thisBooking.booked[thisBooking.date][hour].length;
+      }
+
+      hourPercent = hourPercent + range;
+
+      console.log('hourPercent', hourPercent);
+
+      if(tables == 0) {
+        colors = colors + ', green ' + hourPercent + '%';
+      } else if (tables == 1) {
+        colors = colors + ', yellow ' + hourPercent + '%';
+      } else if (tables == 2) {
+        colors = colors + ', yellow ' + hourPercent + '%';
+      } else {
+        colors = colors + ', red ' + hourPercent + '%';
+      }
+
+    }
+
+    let backgroundColors = 'linear-gradient(to right' + colors + ')';
+    slider.style.backgroundImage = backgroundColors;
 
   }
 
