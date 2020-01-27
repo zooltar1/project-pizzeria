@@ -133,6 +133,7 @@ class Booking{
     let range  = 100/((endHour - startHour)/step);
     let hourPercent = range;
 
+
     let slider = document.getElementsByClassName('rangeSlider')[0];
 
     let colors = '';
@@ -183,17 +184,20 @@ class Booking{
       }
 
       hourPercent = hourPercent + range;
+      let bookingEndHour = hourPercent + range;
 
-      console.log('hourPercent', hourPercent);
+
+      console.log('bookingStartHour', hourPercent);
+      console.log('bookingEndHour', bookingEndHour);
 
       if(tables == 0) {
-        colors = colors + ', green ' + hourPercent + '%';
+        colors = colors + ', green ' + hourPercent + '%' + ' ' + bookingEndHour + '%';
       } else if (tables == 1) {
-        colors = colors + ', yellow ' + hourPercent + '%';
+        colors = colors + ', yellow ' + hourPercent + '%' + ' ' + bookingEndHour + '%';
       } else if (tables == 2) {
-        colors = colors + ', yellow ' + hourPercent + '%';
+        colors = colors + ', yellow ' + hourPercent + '%' + ' ' + bookingEndHour + '%';
       } else {
-        colors = colors + ', red ' + hourPercent + '%';
+        colors = colors + ', red ' + hourPercent + '%' + ' ' + bookingEndHour + '%';
       }
 
     }
