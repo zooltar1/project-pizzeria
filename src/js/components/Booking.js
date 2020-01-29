@@ -161,6 +161,7 @@ class Booking{
         !allAvailable
         &&
         thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId)
+
       ){
         table.classList.add(classNames.booking.tableBooked);
       } else {
@@ -184,20 +185,17 @@ class Booking{
       }
 
       hourPercent = hourPercent + range;
-      let bookingEndHour = hourPercent + range;
 
-
-      console.log('bookingStartHour', hourPercent);
-      console.log('bookingEndHour', bookingEndHour);
+      console.log('bookingEndHour', hourPercent);
 
       if(tables == 0) {
-        colors = colors + ', green ' + hourPercent + '%' + ' ' + bookingEndHour + '%';
+        colors = colors + ', green ' + hourPercent + '%';
       } else if (tables == 1) {
-        colors = colors + ', yellow ' + hourPercent + '%' + ' ' + bookingEndHour + '%';
+        colors = colors + ', yellow ' + hourPercent + '%';
       } else if (tables == 2) {
-        colors = colors + ', yellow ' + hourPercent + '%' + ' ' + bookingEndHour + '%';
+        colors = colors + ', yellow ' + hourPercent + '%';
       } else {
-        colors = colors + ', red ' + hourPercent + '%' + ' ' + bookingEndHour + '%';
+        colors = colors + ', red ' + hourPercent + '%';
       }
 
     }
